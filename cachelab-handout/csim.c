@@ -9,12 +9,12 @@ int s, E, b;
 int S, B;
 int hit_count = 0, miss_count = 0, eviction_count = 0;
 int time_count = 0;
-struct line{
+typedef struct{
   bool validate;
   int time;
   int tag;
-};
-typedef struct line *set;
+}line;
+typedef line *set;
 set *cache;
 FILE *file = NULL;
 void phase_argv(int argc, char **argv) {
@@ -56,7 +56,7 @@ void phase_argv(int argc, char **argv) {
 void init_cache() {
   cache = (set *)malloc(sizeof(set) * S);
   for (int i = 0; i < S; ++i) {
-    cache[i] = (set)malloc(sizeof(struct line) * E);
+    cache[i] = (set)malloc(sizeof(line) * E);
     for (int j = 0; j < E; ++j) {
       cache[i][j].validate = false;
       cache[i][j].tag = -1;
